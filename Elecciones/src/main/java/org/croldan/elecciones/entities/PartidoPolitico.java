@@ -4,9 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class ComunidadAutonoma {
+public class PartidoPolitico {
 
-	// ===============================
+	@Column(unique = true)
+	private String siglas;
 
 	@Column(unique = true)
 	private String nombre;
