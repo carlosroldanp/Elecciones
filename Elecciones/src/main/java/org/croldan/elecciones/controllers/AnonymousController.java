@@ -5,10 +5,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class AnonymousController {
 
 	@GetMapping("/")
-	public String index(ModelMap m) {
+	public String home(ModelMap m) {
 
 		m.put("view", "home/index");
 		return "_t/frame";

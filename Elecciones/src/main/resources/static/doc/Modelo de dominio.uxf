@@ -115,4 +115,20 @@ numEscanyos</panel_attributes>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>90</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>User
+--
+loginname
+password
+admin:boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>
