@@ -27,13 +27,13 @@ public class Eleccion {
 	// ================================================
 
 	public Eleccion() {
-		this.candidaturas = new HashSet<>();
+		this.candidaturas = new HashSet<Candidatura>();
 	}
 
 	public Eleccion(LocalDate fecha) {
 		super();
 		this.fecha = fecha;
-		this.candidaturas = new HashSet<>();
+		this.candidaturas = new HashSet<Candidatura>();
 	}
 
 	// ================================================

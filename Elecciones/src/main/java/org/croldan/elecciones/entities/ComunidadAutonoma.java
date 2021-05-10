@@ -29,13 +29,13 @@ public class ComunidadAutonoma {
 
 	public ComunidadAutonoma() {
 		// Asegurar la implementación de la colleccion de provincias
-		this.provincias = new HashSet<>();
+		this.provincias = new HashSet<Provincia>();
 	}
 
 	public ComunidadAutonoma(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.provincias = new HashSet<>();
+		this.provincias = new HashSet<Provincia>();
 	}
 
 	// ================================================
