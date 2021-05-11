@@ -23,6 +23,7 @@ public class Provincia {
 
 	@Column(unique = true)
 	private String nombre;
+
 	private int numEscanios;
 
 	@OneToMany(mappedBy = "provincia")
