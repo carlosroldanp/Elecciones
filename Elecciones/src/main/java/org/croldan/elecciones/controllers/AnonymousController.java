@@ -1,12 +1,24 @@
 package org.croldan.elecciones.controllers;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
+import org.croldan.elecciones.entities.ComunidadAutonoma;
+import org.croldan.elecciones.entities.Provincia;
 import org.croldan.elecciones.entities.User;
 import org.croldan.elecciones.exception.DangerException;
 import org.croldan.elecciones.exception.InfoException;
 import org.croldan.elecciones.helper.H;
 import org.croldan.elecciones.helper.PRG;
+import org.croldan.elecciones.repositories.CandidaturaRepository;
+import org.croldan.elecciones.repositories.ComunidadAutonomaRepository;
+import org.croldan.elecciones.repositories.EleccionRepository;
+import org.croldan.elecciones.repositories.PartidoPoliticoRepository;
+import org.croldan.elecciones.repositories.ProvinciaRepository;
 import org.croldan.elecciones.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,12 +34,78 @@ public class AnonymousController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private ProvinciaRepository provinciaRepository;
+
+	@Autowired
+	private ComunidadAutonomaRepository comunidadAutonomaRepository;
+
+	@Autowired
+	private CandidaturaRepository candidaturaRepository;
+
+	@Autowired
+	private EleccionRepository eleccionRepository;
+
+	@Autowired
+	private PartidoPoliticoRepository partidoPoliticoRepository;
+
+	private void initProvinciasYComunidades() {
+		Map<String, List<String>> bd = new HashMap<String, List<String>>();
+
+		bd.put("Andalucía",
+				Arrays.asList("Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla"));
+		bd.put("Aragón", Arrays.asList("Huesca", "Teruel", "Zaragoza"));
+		bd.put("Asturias (Principado de)", Arrays.asList("Asturias"));
+		bd.put("Canarias", Arrays.asList("Palmas (Las)", "Santa Cruz de Tenerife"));
+		bd.put("Cantabria", Arrays.asList("Cantabria"));
+		bd.put("Castilla y León", Arrays.asList("Ávila", "Burgos", "León", "Palencia", "Salamanca", "Segovia", "Soria",
+				"Valladolid", "Zamora"));
+		bd.put("Castilla-La Mancha", Arrays.asList("Albacete", "Ciudad Real", "Cuenca", "Guadalajara", "Toledo"));
+		bd.put("Cataluña", Arrays.asList("Barcelona", "Gerona", "Lérida", "Tarragona"));
+		bd.put("Ceuta (Ciudad de)", Arrays.asList("Ceuta"));
+		bd.put("Comunidad Valenciana", Arrays.asList("Alicante", "Castellón", "Valencia"));
+		bd.put("Extremadura", Arrays.asList("Badajoz", "Cáceres"));
+		bd.put("Galicia", Arrays.asList("Coruña (La)", "Lugo", "Orense", "Pontevedra"));
+		bd.put("Islas Baleares", Arrays.asList("Islas Baleares"));
+		bd.put("Madrid (Comunidad de)", Arrays.asList("Madrid"));
+		bd.put("Melilla (Ciudad de)", Arrays.asList("Melilla"));
+		bd.put("Murcia (Región de)", Arrays.asList("Murcia"));
+		bd.put("Navarra (Comunidad Foral de)", Arrays.asList("Navarra"));
+		bd.put("País Vasco", Arrays.asList("Álava", "Guipúzcoa", "Vizcaya"));
+		bd.put("Rioja (La)", Arrays.asList("Rioja (La)"));
+
+		provinciaRepository.deleteAll();
+		comunidadAutonomaRepository.deleteAll();
+
+		for (String nombreCCAA : bd.keySet()) {
+			ComunidadAutonoma nuevaCCAA = new ComunidadAutonoma(nombreCCAA);
+			comunidadAutonomaRepository.save(nuevaCCAA);
+
+			for (String nombreProvincia : bd.get(nombreCCAA)) {
+				Provincia nuevaProvincia = new Provincia(nombreProvincia);
+				nuevaProvincia.setComunidadAutonoma(nuevaCCAA);
+				nuevaCCAA.getProvincias().add(nuevaProvincia);
+				provinciaRepository.save(nuevaProvincia);
+			}
+		}
+	}
+
 	@GetMapping("/init")
-	public String initGet(ModelMap m) throws DangerException {
-		User admin = new User("admin", new BCryptPasswordEncoder().encode("admin"), true);
+	public void initGet(ModelMap m) throws DangerException, InfoException {
+
 		userRepository.deleteAll();
+		provinciaRepository.deleteAll();
+		comunidadAutonomaRepository.deleteAll();
+		candidaturaRepository.deleteAll();
+		partidoPoliticoRepository.deleteAll();
+		eleccionRepository.deleteAll();
+
+		User admin = new User("admin", new BCryptPasswordEncoder().encode("admin"), true);
 		userRepository.save(admin);
-		return "redirect:/";
+
+		this.initProvinciasYComunidades();
+
+		PRG.info("Base de datos reinicializada");
 	}
 
 	@GetMapping("/info")

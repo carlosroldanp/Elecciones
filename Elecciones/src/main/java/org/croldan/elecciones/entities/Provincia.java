@@ -32,16 +32,19 @@ public class Provincia {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private ComunidadAutonoma comunidadAutonoma;
 
+	// ================================================
+
 	public Provincia() {
 		this.candidaturas = new HashSet<Candidatura>();
 	}
 
-	public Provincia(String nombre, int numEscanios, ComunidadAutonoma comunidadAutonoma) {
+	public Provincia(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.numEscanios = numEscanios;
-		this.comunidadAutonoma = comunidadAutonoma;
+		this.numEscanios = 0;
 	}
+
+	// ================================================
 
 	public Long getId() {
 		return id;
