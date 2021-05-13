@@ -6,6 +6,6 @@
 	<h1>Lista de elecciones</h1>
 
 	<ul>
-		<li each="e : ${elecciones}" th:text="${e.fecha}" />
+		<li th:each="e : ${elecciones}" th:text="${e.fecha}" />
 	</ul>
 </div>
