@@ -13,12 +13,12 @@ public class H {
 	 * @throws DangerException si el rol no coincide con el del usuario activo
 	 */
 	public static void isRolOK(String rolExigido, HttpSession s) throws DangerException {
-
 		String rolActual = "anon";
 
 		if (s.getAttribute("user") != null) {
 			rolActual = ((User) (s.getAttribute("user"))).isAdmin() ? "admin" : "auth";
 		}
+
 		if ((rolActual == "anon" || rolActual == "auth") && rolExigido == "admin") {
 			throw new DangerException("Rol inadecuado");
 		}
@@ -30,5 +30,6 @@ public class H {
 		if ((rolActual != "anon") && rolExigido == "anon") {
 			throw new DangerException("Rol inadecuado");
 		}
+
 	}
 }

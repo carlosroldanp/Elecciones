@@ -28,7 +28,7 @@ public class ComunidadAutonoma {
 	// ================================================
 
 	public ComunidadAutonoma() {
-		// Asegurar la implementación de la colleccion de provincias
+		// Asegurar la implementación de la coleccion de provincias
 		this.provincias = new HashSet<Provincia>();
 	}
 

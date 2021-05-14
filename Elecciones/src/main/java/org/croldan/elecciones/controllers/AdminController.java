@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("admin")
 public class AdminController {
 
 	@Autowired
@@ -35,45 +35,62 @@ public class AdminController {
 	@Autowired
 	private ProvinciaRepository provinciaRepository;
 
-	// ============================
-	// ELECCION
-	// ============================
+	// ======================================
+	// ELECCIÓN
+	// ======================================
 
-	@GetMapping("/eleccion/c")
+	@GetMapping("eleccion/c")
 	public String cEleccionGet(ModelMap m) {
-
 		m.put("view", "admin/eleccion/c");
-		return "_t/frame";
+		return "/_t/frame";
 	}
 
-	@PostMapping("/eleccion/c")
+	@PostMapping("eleccion/c")
 	public String cEleccionPost(@RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-
 		eleccionRepository.save(new Eleccion(fecha));
-		return "redirect:admin/eleccion/r";
+		return "redirect:/admin/eleccion/r";
 	}
 
-	@GetMapping("/eleccion/r")
+	@GetMapping("eleccion/r")
 	public String rEleccionGet(ModelMap m) {
-
 		m.put("elecciones", eleccionRepository.findAll());
 		m.put("view", "admin/eleccion/r");
-		return "_t/frame";
+		return "/_t/frame";
 	}
 
-	// ============================
-	// CANDIDATURA
-	// ============================
+	// ======================================
+	// PARTIDO POLÍTICO
+	// ======================================
+	@GetMapping("pp/c")
+	public String cPartidoPoliticoGet(ModelMap m) {
+		m.put("view", "admin/pp/c");
+		return "/_t/frame";
+	}
 
+	@PostMapping("pp/c")
+	public String cPartidoPoliticoPost(@RequestParam("siglas") String siglas, @RequestParam("nombre") String nombre) {
+		partidoPoliticoRepository.save(new PartidoPolitico(siglas, nombre));
+		return "redirect:/admin/pp/r";
+	}
+
+	@GetMapping("pp/r")
+	public String rPartidoPoliticoGet(ModelMap m) {
+		m.put("partidos", partidoPoliticoRepository.findAll());
+		m.put("view", "admin/pp/r");
+		return "/_t/frame";
+	}
+
+	// ======================================
+	// CANDIDATURA
+	// ======================================
 	@GetMapping("candidatura/c")
 	public String cCandidaturaGet(ModelMap m) {
-
 		m.put("elecciones", eleccionRepository.findAll());
 		m.put("pps", partidoPoliticoRepository.findAll());
 		m.put("provincias", provinciaRepository.findAll());
 
 		m.put("view", "admin/candidatura/c");
-		return "_t/frame";
+		return "/_t/frame";
 	}
 
 	@PostMapping("candidatura/c")
@@ -85,40 +102,14 @@ public class AdminController {
 		PartidoPolitico partidoPolitico = partidoPoliticoRepository.getOne(idPartidoPolitico);
 
 		candidaturaRepository.save(new Candidatura(eleccion, provincia, partidoPolitico));
-		return "redirect:admin/candidatura/r";
+		return "redirect:/admin/candidatura/r";
 	}
 
 	@GetMapping("candidatura/r")
 	public String rCandidaturaGet(ModelMap m) {
-
 		m.put("candidaturas", candidaturaRepository.findAll());
 		m.put("view", "admin/candidatura/r");
-		return "_t/frame";
+		return "/_t/frame";
 	}
 
-	// ============================
-	// PARTIDO POLITICO
-	// ============================
-
-	@GetMapping("pp/c")
-	public String cPartidoPoliticoGet(ModelMap m) {
-
-		m.put("view", "admin/pp/c");
-		return "_t/frame";
-	}
-
-	@PostMapping("pp/c")
-	public String cPartidoPoliticoPost(@RequestParam("siglas") String siglas, @RequestParam("nombre") String nombre) {
-
-		partidoPoliticoRepository.save(new PartidoPolitico(siglas, nombre));
-		return "redirect:/admin/pp/r";
-	}
-
-	@GetMapping("pp/r")
-	public String rPartidoPoliticoGet(ModelMap m) {
-
-		m.put("partidos", partidoPoliticoRepository.findAll());
-		m.put("view", "admin/pp/r");
-		return "_t/frame";
-	}
 }

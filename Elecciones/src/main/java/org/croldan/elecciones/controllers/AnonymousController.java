@@ -49,7 +49,7 @@ public class AnonymousController {
 	@Autowired
 	private PartidoPoliticoRepository partidoPoliticoRepository;
 
-	private void initProvinciasYComunidades() {
+	private void initProvinciasYCCAAs() {
 		Map<String, List<String>> bd = new HashMap<String, List<String>>();
 
 		bd.put("Andalucía",
@@ -88,6 +88,7 @@ public class AnonymousController {
 				provinciaRepository.save(nuevaProvincia);
 			}
 		}
+
 	}
 
 	@GetMapping("/init")
@@ -103,7 +104,7 @@ public class AnonymousController {
 		User admin = new User("admin", new BCryptPasswordEncoder().encode("admin"), true);
 		userRepository.save(admin);
 
-		this.initProvinciasYComunidades();
+		this.initProvinciasYCCAAs();
 
 		PRG.info("Base de datos reinicializada");
 	}
@@ -129,8 +130,10 @@ public class AnonymousController {
 	}
 
 	@GetMapping("/")
-	public String home(ModelMap m) {
-		m.put("view", "/anon/home");
+	public String home(ModelMap m, HttpSession s) {
+		User user = s.getAttribute("user") != null ? (User) s.getAttribute("user") : null;
+		String rol = (user != null ? (user.isAdmin() ? "admin" : "auth") : "anon");
+		m.put("view", "/" + rol + "/home");
 		return "/_t/frame";
 	}
 
