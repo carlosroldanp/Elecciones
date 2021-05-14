@@ -72,7 +72,7 @@ public class AdminController {
 		m.put("pps", partidoPoliticoRepository.findAll());
 		m.put("provincias", provinciaRepository.findAll());
 
-		m.put("view", "admin/candidatura");
+		m.put("view", "admin/candidatura/c");
 		return "_t/frame";
 	}
 
@@ -85,7 +85,7 @@ public class AdminController {
 		PartidoPolitico partidoPolitico = partidoPoliticoRepository.getOne(idPartidoPolitico);
 
 		candidaturaRepository.save(new Candidatura(eleccion, provincia, partidoPolitico));
-		return "redirect:/admin/candidatura/r";
+		return "redirect:admin/candidatura/r";
 	}
 
 	@GetMapping("candidatura/r")
