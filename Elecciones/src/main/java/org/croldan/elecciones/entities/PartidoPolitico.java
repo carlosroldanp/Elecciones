@@ -31,14 +31,14 @@ public class PartidoPolitico {
 	// ================================================
 
 	public PartidoPolitico() {
-		this.candidaturas = new HashSet<Candidatura>();
+		this.candidaturas = new HashSet<>();
 	}
 
 	public PartidoPolitico(String siglas, String nombre) {
 		super();
 		this.siglas = siglas;
 		this.nombre = nombre;
-		this.candidaturas = new HashSet<Candidatura>();
+		this.candidaturas = new HashSet<>();
 	}
 
 	// ================================================

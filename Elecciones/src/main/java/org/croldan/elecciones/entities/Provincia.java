@@ -35,7 +35,7 @@ public class Provincia {
 	// ================================================
 
 	public Provincia() {
-		this.candidaturas = new HashSet<Candidatura>();
+		this.candidaturas = new HashSet<>();
 	}
 
 	public Provincia(String nombre) {

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class ComunidadAutonoma {
 
-	// ================================================
+	// =================================================
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,20 +25,19 @@ public class ComunidadAutonoma {
 	@OneToMany(mappedBy = "comunidadAutonoma")
 	private Collection<Provincia> provincias;
 
-	// ================================================
+	// =================================================
 
 	public ComunidadAutonoma() {
-		// Asegurar la implementación de la coleccion de provincias
-		this.provincias = new HashSet<Provincia>();
+		this.provincias = new HashSet<>();
 	}
 
 	public ComunidadAutonoma(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.provincias = new HashSet<Provincia>();
+		this.provincias = new HashSet<>();
 	}
 
-	// ================================================
+	// =================================================
 
 	public Long getId() {
 		return id;

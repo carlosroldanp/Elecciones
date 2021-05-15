@@ -49,8 +49,8 @@ public class AnonymousController {
 	@Autowired
 	private PartidoPoliticoRepository partidoPoliticoRepository;
 
-	private void initProvinciasYCCAAs() {
-		Map<String, List<String>> bd = new HashMap<String, List<String>>();
+	private void initProvinciasYComunidades() {
+		Map<String, List<String>> bd = new HashMap<>();
 
 		bd.put("Andalucía",
 				Arrays.asList("Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla"));
@@ -90,7 +90,7 @@ public class AnonymousController {
 		}
 
 	}
-
+	//Inicio manual de la base de datos localhost:8080/init
 	@GetMapping("/init")
 	public void initGet(ModelMap m) throws DangerException, InfoException {
 
@@ -104,7 +104,7 @@ public class AnonymousController {
 		User admin = new User("admin", new BCryptPasswordEncoder().encode("admin"), true);
 		userRepository.save(admin);
 
-		this.initProvinciasYCCAAs();
+		this.initProvinciasYComunidades();
 
 		PRG.info("Base de datos reinicializada");
 	}
