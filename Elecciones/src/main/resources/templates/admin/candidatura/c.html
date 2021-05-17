@@ -10,7 +10,7 @@
 		
 		<label>PROVINCIA</label>
 		<select name="idProvincia">
-			<option th:each="p : ${provincias}" th:value="${p.id}" th:text="|${p.nombre} (${p.comunidadAutonoma.nombre})|"></option>
+			<option th:each="p:${provincias}" th:value="${p.id}" th:text="|${p.nombre} (${p.comunidadAutonoma.nombre})|"></option>
 		</select>
 		<br/>
 		
@@ -19,6 +19,7 @@
 			<option th:each="pp:${pps}" th:value="${pp.id}" th:text="|${pp.siglas} (${pp.nombre})|"></option>
 		</select>
 		<br/>
-
+		
+		<input type="submit" class="mt-2 btn btn-success"/>
 	</form>
 </div>
