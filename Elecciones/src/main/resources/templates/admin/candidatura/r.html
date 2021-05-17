@@ -4,7 +4,8 @@
 
 	<h1>Lista de candidaturas</h1>
 
-	<ul>
-		<li th:each="e:${elecciones}" th:text="${e.fecha}" />
-	</ul>
+	<select>
+		<option th:each="e:${elecciones}" th:text="${e.fecha}"
+			th:value="${e.id}" name="idEleccion"></option>
+	</select>
 </div>
