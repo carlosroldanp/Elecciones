@@ -8,4 +8,12 @@
 		<option th:each="e:${elecciones}" th:text="${e.fecha}"
 			th:value="${e.id}" name="idEleccion"></option>
 	</select>
+	
+	<img onload="f()"/>
+
+	<script type="text/javascript">
+	function f() {
+		alert("OK");
+	}
+	</script>
 </div>
