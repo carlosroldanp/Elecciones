@@ -1,14 +1,16 @@
 ANONYMOUS
-- home
-- registro
-- login
-- init (protegido, borra todo, crea usuario admin, ccaa y provincias)
-- R Eleccion
-- R Candidatura
-- R PartidoPolitico
+*- home
+*- registro
+*- login
+*- init (protegido, borra todo, crea usuario admin, ccaa y provincias)
 USER
 
+- Primera vez que entra, pedir fecha de elecciones y provincia y almacenar
+  el resultado en una variable de sesión 
+- R Candidaturas 
+- U votos Candidaturas
+
 ADMIN
-- CR Candidatura
-- CR Eleccion
-- CR PartidoPolitico
+*- CR Candidatura
+*- CR Eleccion
+*- CR PartidoPolitico
