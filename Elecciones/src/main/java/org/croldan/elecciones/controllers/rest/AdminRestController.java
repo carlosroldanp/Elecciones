@@ -21,9 +21,8 @@ public class AdminRestController {
 	 * Devolver todas las candidaturas Aquellas candidaturas que se relacionen con
 	 * la fecha de Elecciones
 	 */
-	@GetMapping("candidaturas/{idEleccion}")
-	public List<Candidatura> getCandidaturas(@PathVariable("idEleccion") Long idEleccion) {
-
-		return candidaturaRepository.findAllByEleccionId(idEleccion);
+	@GetMapping("candidaturas/{eleccionId}")
+	public List<Candidatura> getCandidaturas(@PathVariable("eleccionId") Long eleccionId) {
+		return candidaturaRepository.findAllByEleccionId(eleccionId);
 	}
 }

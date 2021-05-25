@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CandidaturaRepository extends JpaRepository<Candidatura, Long> {
 
-	// Devuelve la lista de candidaturas cuyo id coincida con el idEleccion
-	public List<Candidatura> findAllByEleccionId(Long idEleccion);
+	// Devuelve la lista de candidaturas cuyo id coincida con el eleccionId
+	public List<Candidatura> findAllByEleccionId(Long eleccionId);
 
-	public List<Candidatura> findAllByProvinciaId(Long idEleccion);
+	public List<Candidatura> findAllByProvinciaId(Long eleccionId);
 
-	public List<Candidatura> findAllByProvinciaAndByEleccion(Provincia p, Eleccion e);
+	public List<Candidatura> findAllByProvinciaAndEleccion(Provincia p, Eleccion e);
 }

@@ -2,16 +2,16 @@
 	<h1>Nueva candidatura</h1>
 	<form method="post">
 		
-		<input name="idEleccion" type="hidden" th:value="${idEleccion}">
+		<input name="eleccionId" type="hidden" th:value="${eleccionId}">
 		
 		<label>PROVINCIA</label>
-		<select name="idProvincia">
+		<select name="provinciaId">
 			<option th:each="p:${provincias}" th:value="${p.id}" th:text="|${p.nombre} (${p.comunidadAutonoma.nombre})|"></option>
 		</select>
 		<br/>
 		
 		<label>PARTIDO POLÍTICO</label>
-		<select name="idPartidoPolitico">
+		<select name="partidoPoliticoId">
 			<option th:each="pp:${pps}" th:value="${pp.id}" th:text="|${pp.siglas} (${pp.nombre})|"></option>
 		</select>
 		<br/>

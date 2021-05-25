@@ -32,7 +32,7 @@
 	function getCandidaturas() {
 		
 		xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("GET","/rest/admin/candidaturas/" + document.getElementById("idEleccion").value , true);
+		xmlhttp.open("GET","/rest/admin/candidaturas/" + document.getElementById("eleccionId").value , true);
 		xmlhttp.send();
 		xmlhttp.onreadystatechange=function() {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -54,8 +54,8 @@
 	
 	<h1>Lista de candidaturas</h1>
 
-	<select onchange="getCandidaturas()" id="idEleccion" name="idEleccion">
-		<option th:each="e:${elecciones}" th:text="|${e.fecha.getMonth()} ${e.fecha.getYear()}|" th:value="${e.id}" name="idEleccion"></option>
+	<select onchange="getCandidaturas()" id="eleccionId" name="eleccionId">
+		<option th:each="e:${elecciones}" th:text="|${e.fecha.getMonth()} ${e.fecha.getYear()}|" th:value="${e.id}" name="eleccionId"></option>
 	</select>
 	
 	</form>

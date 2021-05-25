@@ -26,16 +26,16 @@ public class AuthController {
 	private CandidaturaRepository candidaturaRepository;
 
 	@Autowired
-	EleccionRepository eleccionRepository;
+	private EleccionRepository eleccionRepository;
 
 	@Autowired
-	ProvinciaRepository provinciaRepository;
+	private ProvinciaRepository provinciaRepository;
 
 	@PostMapping("seleccionarProvinciaYEleccion")
-	public String seleccionarProvinciaYEleccion(@RequestParam("idEleccion") Long idEleccion,
-			@RequestParam("idProvincia") Long idProvincia, HttpSession s) {
-		Eleccion e = eleccionRepository.getOne(idEleccion);
-		Provincia p = provinciaRepository.getOne(idProvincia);
+	public String seleccionarProvinciaYEleccion(@RequestParam("eleccionId") Long eleccionId,
+			@RequestParam("provinciaId") Long provinciaId, HttpSession s) {
+		Eleccion e = eleccionRepository.getOne(eleccionId);
+		Provincia p = provinciaRepository.getOne(provinciaId);
 
 		s.setAttribute("eleccion", e);
 		s.setAttribute("provincia", p);
@@ -47,7 +47,7 @@ public class AuthController {
 	public String candidaturaR(ModelMap m, HttpSession s) {
 		Eleccion e = (Eleccion) (s.getAttribute("eleccion"));
 		Provincia p = (Provincia) (s.getAttribute("provincia"));
-		List<Candidatura> candidaturas = candidaturaRepository.findAllByProvinciaAndByEleccion(p, e);
+		List<Candidatura> candidaturas = candidaturaRepository.findAllByProvinciaAndEleccion(p, e);
 
 		m.put("eleccion", e);
 		m.put("provincia", p);

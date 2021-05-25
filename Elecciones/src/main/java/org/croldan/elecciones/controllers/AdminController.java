@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
@@ -84,8 +84,8 @@ public class AdminController {
 	// CANDIDATURA
 	// ======================================
 	@GetMapping("candidatura/c")
-	public String candidaturaCGet(@RequestParam("idEleccion") Long idEleccion, ModelMap m) {
-		m.put("idEleccion", idEleccion);
+	public String candidaturaCGet(@RequestParam("eleccionId") Long eleccionId, ModelMap m) {
+		m.put("eleccionId", eleccionId);
 		m.put("pps", partidoPoliticoRepository.findAll());
 		m.put("provincias", provinciaRepository.findAll());
 
@@ -94,12 +94,12 @@ public class AdminController {
 	}
 
 	@PostMapping("candidatura/c")
-	public String candidaturaCPost(@RequestParam("idEleccion") Long idEleccion,
-			@RequestParam("idProvincia") Long idProvincia, @RequestParam("idPartidoPolitico") Long idPartidoPolitico) {
+	public String candidaturaCPost(@RequestParam("eleccionId") Long eleccionId,
+			@RequestParam("provinciaId") Long provinciaId, @RequestParam("partidoPoliticoId") Long partidoPoliticoId) {
 
-		Eleccion eleccion = eleccionRepository.getOne(idEleccion);
-		Provincia provincia = provinciaRepository.getOne(idProvincia);
-		PartidoPolitico partidoPolitico = partidoPoliticoRepository.getOne(idPartidoPolitico);
+		Eleccion eleccion = eleccionRepository.getOne(eleccionId);
+		Provincia provincia = provinciaRepository.getOne(provinciaId);
+		PartidoPolitico partidoPolitico = partidoPoliticoRepository.getOne(partidoPoliticoId);
 
 		candidaturaRepository.save(new Candidatura(eleccion, provincia, partidoPolitico));
 		return "redirect:/admin/candidatura/r";
