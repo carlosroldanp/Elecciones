@@ -1,8 +1,11 @@
 <div class="container">
 	<h1>Selecciona la provincia que quieres ver</h1>
+	  
+	 <!-- <h3 th:text="${session.user.admin}"></h3> -->
 	
-	
+	 
 	<form action="/auth/seleccionarProvinciaYEleccion" method="post">
+	 
 		<label>ELECCIONES</label>
 		<select name="eleccionId">
 			<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}"></option>
