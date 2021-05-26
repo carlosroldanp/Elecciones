@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 	var xmlhttp;
 
 	function rellenarDatosCandidaturas() {
@@ -26,7 +26,7 @@
 		
 		tabla += '</table>';
 		
-		document.getElementById("idCandidaturas").innerHTML = tabla;
+		document.getElementById("candidaturaId").innerHTML = tabla;
 	}
 
 	function getCandidaturas() {
@@ -43,23 +43,24 @@
 </script>
 
 <div class="container">
-	
-	<form action="/admin/candidatura/c">
-	
-	<br>
-	
-	<input type="submit" class="mt-2 btn btn-info" value="Crear"/>
-	
-	<br><br>
-	
-	<h1>Lista de candidaturas</h1>
 
-	<select onchange="getCandidaturas()" id="eleccionId" name="eleccionId">
-		<option th:each="e:${elecciones}" th:text="|${e.fecha.getMonth()} ${e.fecha.getYear()}|" th:value="${e.id}" name="eleccionId"></option>
-	</select>
-	
+	<form action="/admin/candidatura/c">
+
+		<br> <input type="submit" class="mt-2 btn btn-info" value="Crear" />
+
+		<br>
+		<br>
+
+		<h1>Lista de candidaturas</h1>
+
+		<select onchange="getCandidaturas()" id="eleccionId" name="eleccionId">
+			<option th:each="e:${elecciones}"
+				th:text="|${e.fecha.getMonth()} ${e.fecha.getYear()}|"
+				th:value="${e.id}" name="eleccionId"></option>
+		</select>
+
 	</form>
 
-	<div id="idCandidaturas"></div>
+	<div id="candidaturaId"></div>
 
 </div>
